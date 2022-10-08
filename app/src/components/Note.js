@@ -9,11 +9,9 @@ function Note ({ nota }) {
       content: nota.content,
       important: !important
     }
-
-    const { data: noteUpdate } = await axios
+    setImportant(!important)
+    await axios
       .put(`/api/notes/${nota.id}`, newNote)
-
-    setImportant(noteUpdate.important)
   }
 
   return (
