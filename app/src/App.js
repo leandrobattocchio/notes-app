@@ -22,18 +22,13 @@ function App () {
   return (
     <div>
       <div className='navbar navbar-dark bg-dark shadow-sm'>
-        <ul class='dropdown-menu'>
-          <li><h6 class='dropdown-header'>Dropdown header</h6></li>
-          <li><a class='dropdown-item' href='#'>Action</a></li>
-          <li><a class='dropdown-item' href='#'>Another action</a></li>
-        </ul>
         <button style={{ marginLeft: '15px' }} className='btn btn-primary my-2' onClick={handleSetLogin}>{login ? 'Registrarse' : 'Loguearse'}</button>
         {login
           ? <Login logged={userLogged} setLogged={setUserLogged} />
           : <Register />}
       </div>
 
-      <h1>APLICACION DE NOTAS</h1>
+      <h1 style={{ textAlign: 'center', backgroundColor: 'rgba(0, 0, 0, 0.7)', fontFamily: 'italy', fontSize: '50px' }}>APLICACION DE NOTAS</h1>
       <Notes logged={userLogged} setLogged={setUserLogged} />
     </div>
   )

@@ -21,9 +21,15 @@ function Notes ({ logged, setLogged }) {
     }
 
     try {
-      const { data } = await axios.post('/api/notes', { content: noteContent }, config)
-      setNotes(prevNotes => prevNotes.concat(data))
-      setNoteContent('')
+      await axios.post('/api/notes', { content: noteContent }, config)
+      axios
+        .get('/api/notes/')
+        .then((response) => {
+          const { data } = response
+          setNotes(data)
+          setNoteContent('')
+        })
+        .catch(error => console.log(error))
     } catch (error) {
       console.log(error)
     }

@@ -3,7 +3,6 @@ import axios from 'axios'
 
 function Note ({ nota }) {
   const [important, setImportant] = useState(nota.important)
-
   const handleChangeImportant = async () => {
     const newNote = {
       content: nota.content,
@@ -15,14 +14,20 @@ function Note ({ nota }) {
   }
 
   return (
-    <div className='col'>
-      <div className='card shadow-sm'>
-        <div className='card-body'>
-          <p className='card-text'>{nota.content}</p>
+    nota.user
+      ? (
+        <div className='col'>
+          <div className='card shadow-sm'>
+            <div className='card-body'>
+              <p className='card-text'>{nota.content}</p>
+              <p><b>Author: </b>{nota.user.name}</p>
+            </div>
+            {important ? <button onClick={handleChangeImportant}>importante</button> : <button onClick={handleChangeImportant}>no importante</button>}
+          </div>
         </div>
-        {important ? <button onClick={handleChangeImportant}>importante</button> : <button onClick={handleChangeImportant}>no importante</button>}
-      </div>
-    </div>
+        )
+      : 'Cargando...'
+
   )
 }
 
