@@ -40,33 +40,34 @@ function Notes ({ logged, setLogged }) {
   }, [setLogged])
 
   return (
-    <div>
-      {notes !== []
-        ? (
-          <Togglable buttonLabel='notes'>
-            <ul>
-              {notes.map((nota) => <Note key={nota.id} nota={nota} />)}
-            </ul>
-          </Togglable>
-          )
-        : (
-            'Cargando...'
-          )}
-      <Togglable buttonLabel='notes form'>
-        {logged
+    <div className='album py-5 bg-light' style={{ position: 'flex' }}>
+      <div className='container'>
+        {notes !== []
           ? (
-            <form onSubmit={handleSendNote}>
-              <input
-                placeholder='content de la nota...'
-                type='text'
-                value={noteContent}
-                onChange={({ target }) => setNoteContent(target.value)}
-              />
-              <button>Enviar nota</button>
-            </form>)
-          : <h2>Para enviar notas debe loguearse...</h2>}
-      </Togglable>
+            <Togglable buttonLabel='notes'>
 
+              {notes.map((nota) => <Note key={nota.id} nota={nota} />)}
+
+            </Togglable>
+            )
+          : (
+              'Cargando...'
+            )}
+        <Togglable buttonLabel='notes form'>
+          {logged
+            ? (
+              <form onSubmit={handleSendNote}>
+                <input
+                  placeholder='content de la nota...'
+                  type='text'
+                  value={noteContent}
+                  onChange={({ target }) => setNoteContent(target.value)}
+                />
+                <button>Enviar nota</button>
+              </form>)
+            : <h2>Para enviar notas debe loguearse...</h2>}
+        </Togglable>
+      </div>
     </div>
   )
 }

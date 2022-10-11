@@ -15,9 +15,11 @@ function Note ({ nota }) {
   }
 
   return (
-    <div>
-      <div style={{ display: 'flex' }}>
-        <p>{nota.content}</p>
+    <div className='col'>
+      <div className='card shadow-sm'>
+        <div className='card-body'>
+          <p className='card-text'>{nota.content}</p>
+        </div>
         {important ? <button onClick={handleChangeImportant}>importante</button> : <button onClick={handleChangeImportant}>no importante</button>}
       </div>
     </div>

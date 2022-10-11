@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import userService from '../services/userService'
+import { login } from '../services/userService'
 
 function Login ({ logged, setLogged }) {
   const [username, setUsername] = useState('')
@@ -13,7 +13,7 @@ function Login ({ logged, setLogged }) {
   async function handleLogin (event) {
     event.preventDefault()
     try {
-      const user = await userService.login({
+      const user = await login({
         username,
         password
       })
@@ -28,15 +28,15 @@ function Login ({ logged, setLogged }) {
   }
 
   return (
-    <div>
-      <form onSubmit={handleLogin}>
-        {
-          logged
-            ? (
-              <button onClick={handleLogout}>
-                Desloguearse
-              </button>)
-            : (
+    <div className='container'>
+      {
+        logged
+          ? (
+            <button style={{ textAlign: 'right' }} onClick={handleLogout} className='btn btn-primary my-2'>
+              Desloguearse
+            </button>)
+          : (
+            <form onSubmit={handleLogin} style={{ marginLeft: '30%' }}>
               <div>
                 <input
                   type='text'
@@ -51,11 +51,11 @@ function Login ({ logged, setLogged }) {
                   value={password}
                   onChange={({ target }) => setPassword(target.value)}
                 />
-                <button name='login-form-button'>Login</button>
-              </div>)
-
-        }
-      </form>
+                <button style={{ marginLeft: '3px' }} name='login-form-button' className='btn btn-primary my-2'>Login</button>
+              </div>
+            </form>
+            )
+      }
     </div>
   )
 }

@@ -11,10 +11,10 @@ export default function Togglable ({ children, buttonLabel }) {
 
   return (
     <div>
-      <div data-testid='togglable' style={isVisible}>
+      <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3' data-testid='togglable' style={isVisible}>
         {children}
       </div>
-      <button onClick={handleVisible}>{visible ? 'Hide' : 'Show'} {buttonLabel}</button>
+      <button className='btn btn-primary my-2' onClick={handleVisible}>{visible ? 'Hide' : 'Show'} {buttonLabel}</button>
     </div>
   )
 }

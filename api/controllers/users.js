@@ -22,7 +22,7 @@ usersRouter.post('/', async (request, response, next) => {
           DB_DISCONNECT()
         })
         .catch(error => {
-          response.status(400).json(error.errors.username.message)
+          response.status(400).json(error.errors.username.message).end()
           DB_DISCONNECT()
         })
     })
