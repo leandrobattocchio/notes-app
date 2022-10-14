@@ -7,10 +7,11 @@ import Togglable from './Togglable'
 function Notes ({ logged, setLogged }) {
   const [notes, setNotes] = useState([''])
   const [noteContent, setNoteContent] = useState('')
+  const [disabled, setDisabled] = useState(false)
 
   async function handleSendNote (event) {
     event.preventDefault()
-
+    setDisabled(true)
     const user = JSON.parse(logged)
     const { token } = user
 
@@ -28,9 +29,14 @@ function Notes ({ logged, setLogged }) {
           const { data } = response
           setNotes(data)
           setNoteContent('')
+          setDisabled(false)
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+          console.log(error)
+          setDisabled(false)
+        })
     } catch (error) {
+      setDisabled(false)
       console.log(error)
     }
   }
@@ -46,35 +52,33 @@ function Notes ({ logged, setLogged }) {
   }, [setLogged])
 
   return (
-    <div className='album py-5 bg-light' style={{ position: 'flex' }}>
-      <div className='container'>
-        {notes !== []
+    <div>
+      {notes !== []
+        ? (
+          <Togglable buttonLabel='notes' style='row row-example'>
+            {notes.map((nota) => <Note key={nota.id} nota={nota} token={logged} />)}
+          </Togglable>
+          )
+        : ('Cargando...')}
+      <Togglable buttonLabel='notes form'>
+        {logged
           ? (
-            <Togglable buttonLabel='notes'>
-
-              {notes.map((nota) => <Note key={nota.id} nota={nota} />)}
-
-            </Togglable>
-            )
-          : (
-              'Cargando...'
-            )}
-        <Togglable buttonLabel='notes form'>
-          {logged
-            ? (
-              <form onSubmit={handleSendNote}>
+            <form onSubmit={handleSendNote}>
+              <div className='grid'>
                 <input
-                  placeholder='content de la nota...'
+                  required='required'
+                  placeholder='Contenido de la nota...'
                   type='text'
                   value={noteContent}
                   onChange={({ target }) => setNoteContent(target.value)}
                 />
-                <button>Enviar nota</button>
-              </form>)
-            : <h2>Para enviar notas debe loguearse...</h2>}
-        </Togglable>
-      </div>
+                <button aria-busy={disabled}>Enviar nota</button>
+              </div>
+            </form>)
+          : <h2>Para enviar notas debe loguearse...</h2>}
+      </Togglable>
     </div>
+
   )
 }
 

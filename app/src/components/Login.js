@@ -4,6 +4,7 @@ import { login } from '../services/userService'
 function Login ({ logged, setLogged }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [disabled, setDisabled] = useState(false)
 
   function handleLogout () {
     setLogged(null)
@@ -12,6 +13,7 @@ function Login ({ logged, setLogged }) {
 
   async function handleLogin (event) {
     event.preventDefault()
+    setDisabled(true)
     try {
       const user = await login({
         username,
@@ -22,23 +24,26 @@ function Login ({ logged, setLogged }) {
       setPassword('')
       setUsername('')
       window.localStorage.setItem('token', JSON.stringify(user))
+      setDisabled(false)
     } catch (error) {
       console.log(error.response.data.error)
+      setDisabled(false)
     }
   }
 
   return (
-    <div className='container'>
+    <div>
       {
         logged
           ? (
-            <button style={{ textAlign: 'right' }} onClick={handleLogout} className='btn btn-primary my-2'>
+            <button onClick={handleLogout}>
               Desloguearse
             </button>)
           : (
-            <form onSubmit={handleLogin} style={{ marginLeft: '30%' }}>
-              <div>
+            <form onSubmit={handleLogin}>
+              <div className='grid'>
                 <input
+                  required='required'
                   type='text'
                   placeholder='Username'
                   value={username}
@@ -46,12 +51,13 @@ function Login ({ logged, setLogged }) {
                 />
 
                 <input
+                  required='required'
                   type='password'
                   placeholder='Password'
                   value={password}
                   onChange={({ target }) => setPassword(target.value)}
                 />
-                <button style={{ marginLeft: '3px' }} name='login-form-button' className='btn btn-primary my-2'>Login</button>
+                <button aria-busy={disabled} name='login-form-button'>Login</button>
               </div>
             </form>
             )

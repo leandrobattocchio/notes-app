@@ -11,6 +11,7 @@ function App () {
   useEffect(() => {
     const token = window.localStorage.getItem('token')
     if (token) {
+      setLogin(true)
       setUserLogged(token)
     }
   }, [])
@@ -20,16 +21,21 @@ function App () {
   }
 
   return (
-    <div>
-      <div className='navbar navbar-dark bg-dark shadow-sm'>
-        <button style={{ marginLeft: '15px' }} className='btn btn-primary my-2' onClick={handleSetLogin}>{login ? 'Registrarse' : 'Loguearse'}</button>
+    <div className='container'>
+      <div className='container-fluid'>
+        {userLogged
+          ? ''
+          : <button onClick={handleSetLogin}>{login ? 'Registrarse' : 'Loguearse'}</button>}
+
         {login
           ? <Login logged={userLogged} setLogged={setUserLogged} />
           : <Register />}
       </div>
+      <h1 style={{ textAlign: 'center' }}>APLICACION DE NOTAS</h1>
+      <div className='container'>
+        <Notes logged={userLogged} setLogged={setUserLogged} />
+      </div>
 
-      <h1 style={{ textAlign: 'center', backgroundColor: 'rgba(0, 0, 0, 0.7)', fontFamily: 'italy', fontSize: '50px' }}>APLICACION DE NOTAS</h1>
-      <Notes logged={userLogged} setLogged={setUserLogged} />
     </div>
   )
 }
