@@ -77,10 +77,14 @@ notesRouter.post('/', userExtractor, async (request, response, next) => {
 
       newNote.save()
         .then(savedNote => {
-          console.log({ savedNote })
           user.notes = user.notes.concat(newNote._id)
           user.save().then(() => {
-            response.status(201).json(savedNote).end()
+            savedNote.populate('user', {
+              username: 1,
+              name: 1
+            }).then(() => {
+              response.status(201).json(savedNote).end()
+            })
             DB_DISCONNECT()
           })
         })

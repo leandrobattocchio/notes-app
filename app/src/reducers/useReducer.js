@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export const useReducer = (state = { notes: [], token: false }, action) => {
   if (action.type === 'login') {
     const token = window.localStorage.setItem('token', action.payload)
@@ -37,18 +35,18 @@ export const useReducer = (state = { notes: [], token: false }, action) => {
   }
 
   if (action.type === 'getNotes') {
-    axios
-      .get('/api/notes/')
-      .then((response) => {
-        const { data } = response
-        console.log(data)
-        state = {
-          ...state,
-          notes: data
-        }
-      })
-      .catch(error => console.log(error))
-    return state
+    state = {
+      ...state,
+      notes: action.payload
+    }
+  }
+
+  if (action.type === 'postNote') {
+    const notes = state.notes
+    state = {
+      ...state,
+      notes: notes.concat(action.payload)
+    }
   }
   return state
 }

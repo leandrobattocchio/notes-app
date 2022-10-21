@@ -7,10 +7,7 @@ const Header = () => {
   const dispatch = useDispatch()
   const [login, setLogin] = useState(false)
   const state = useSelector(state => state)
-  let token
-  if (state) {
-    token = state.token
-  }
+  const { token } = state
 
   useEffect(() => {
     if (!token) {
