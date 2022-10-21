@@ -1,41 +1,19 @@
 import './App.css'
-import Login from './components/Login'
+import Header from './components/Header'
 import Notes from './components/Notes'
-import { useEffect, useState } from 'react'
-import Register from './components/Register'
+import { Provider } from 'react-redux'
+import { configureStore } from '@reduxjs/toolkit'
+import { useReducer } from './reducers/useReducer'
 
 function App () {
-  const [userLogged, setUserLogged] = useState(null)
-  const [login, setLogin] = useState(false)
-
-  useEffect(() => {
-    const token = window.localStorage.getItem('token')
-    if (token) {
-      setLogin(true)
-      setUserLogged(token)
-    }
-  }, [])
-
-  function handleSetLogin () {
-    setLogin(prevState => !prevState)
-  }
+  const store = configureStore({ reducer: useReducer })
 
   return (
     <div className='container'>
-      <div className='container-fluid'>
-        {userLogged
-          ? ''
-          : <button onClick={handleSetLogin}>{login ? 'Registrarse' : 'Loguearse'}</button>}
-
-        {login
-          ? <Login logged={userLogged} setLogged={setUserLogged} />
-          : <Register />}
-      </div>
-      <h1 style={{ textAlign: 'center' }}>APLICACION DE NOTAS</h1>
-      <div className='container'>
-        <Notes logged={userLogged} setLogged={setUserLogged} />
-      </div>
-
+      <Provider store={store}>
+        <Header />
+        <Notes />
+      </Provider>
     </div>
   )
 }

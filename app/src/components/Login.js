@@ -1,14 +1,15 @@
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { login } from '../services/userService'
 
-function Login ({ logged, setLogged }) {
+function Login ({ dispatch }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [disabled, setDisabled] = useState(false)
+  const token = useSelector(state => state.token)
 
   function handleLogout () {
-    setLogged(null)
-    window.localStorage.removeItem('token')
+    dispatch({ type: 'logout' })
   }
 
   async function handleLogin (event) {
@@ -20,10 +21,9 @@ function Login ({ logged, setLogged }) {
         password
       })
 
-      setLogged(JSON.stringify(user))
+      dispatch({ type: 'login', payload: JSON.stringify(user) })
       setPassword('')
       setUsername('')
-      window.localStorage.setItem('token', JSON.stringify(user))
       setDisabled(false)
     } catch (error) {
       console.log(error.response.data.error)
@@ -34,7 +34,7 @@ function Login ({ logged, setLogged }) {
   return (
     <div>
       {
-        logged
+        token
           ? (
             <button onClick={handleLogout}>
               Desloguearse

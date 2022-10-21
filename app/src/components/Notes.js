@@ -3,18 +3,18 @@ import React, { useState, useEffect } from 'react'
 import Note from './Note'
 import axios from 'axios'
 import Togglable from './Togglable'
-
-function Notes ({ logged, setLogged }) {
-  const [notes, setNotes] = useState([''])
+import { useSelector } from 'react-redux'
+function Notes () {
+  const state = useSelector(state => state)
+  const [notes, setNotes] = useState([])
   const [noteContent, setNoteContent] = useState('')
   const [disabled, setDisabled] = useState(false)
 
   async function handleSendNote (event) {
     event.preventDefault()
     setDisabled(true)
-    const user = JSON.parse(logged)
+    const user = JSON.parse(state.token)
     const { token } = user
-
     const config = {
       headers: {
         Authorization: `Bearer ${token}`
@@ -30,6 +30,7 @@ function Notes ({ logged, setLogged }) {
           setNotes(data)
           setNoteContent('')
           setDisabled(false)
+          window.scroll({ top: 2500, left: 0, behavior: 'smooth' })
         })
         .catch(error => {
           console.log(error)
@@ -41,27 +42,28 @@ function Notes ({ logged, setLogged }) {
     }
   }
 
-  useEffect(() => {
-    axios
-      .get('/api/notes/')
-      .then((response) => {
-        const { data } = response
-        setNotes(data)
-      })
-      .catch(error => console.log(error))
-  }, [setLogged])
+  useEffect(() => async () => {
+    try {
+      const response = await axios.get('/api/notes/')
+      const { data } = response
+      setNotes(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }, [state])
 
   return (
-    <div>
+    <div className='container'>
+      <h1 style={{ textAlign: 'center' }}>APLICACION DE NOTAS</h1>
       {notes !== []
         ? (
           <Togglable buttonLabel='notes' style='row row-example'>
-            {notes.map((nota) => <Note key={nota.id} nota={nota} token={logged} />)}
+            {notes.map((nota) => <Note key={nota.id} nota={nota} token={state.token} />)}
           </Togglable>
           )
         : ('Cargando...')}
       <Togglable buttonLabel='notes form'>
-        {logged
+        {state.token
           ? (
             <form onSubmit={handleSendNote}>
               <div className='grid'>

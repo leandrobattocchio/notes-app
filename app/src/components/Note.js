@@ -12,6 +12,7 @@ function Note ({ nota, token }) {
       important: !important
     }
 
+    // Recordar cambiar importancia directamente con la respuesta de la llamada
     await axios
       .put(`/api/notes/${nota.id}`, newNote)
     setDisabled(false)
@@ -50,7 +51,6 @@ function Note ({ nota, token }) {
           </div>
 
         </div>
-
         )
       : 'Cargando...'
 

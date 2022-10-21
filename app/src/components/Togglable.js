@@ -8,7 +8,6 @@ export default function Togglable ({ children, buttonLabel, style = 'container-f
   function handleVisible () {
     setVisible(prevState => !prevState)
   }
-
   return (
     <div>
       <div className={style} data-testid='togglable' style={isVisible}>
