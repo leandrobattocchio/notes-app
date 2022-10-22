@@ -9,7 +9,7 @@ function Login ({ dispatch }) {
   const token = useSelector(state => state.token)
 
   function handleLogout () {
-    dispatch({ type: 'logout' })
+    dispatch({ type: '@token/logout' })
   }
 
   async function handleLogin (event) {
@@ -20,8 +20,7 @@ function Login ({ dispatch }) {
         username,
         password
       })
-
-      dispatch({ type: 'login', payload: JSON.stringify(user) })
+      dispatch({ type: '@token/login', payload: JSON.stringify(user) })
       setPassword('')
       setUsername('')
       setDisabled(false)

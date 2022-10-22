@@ -1,19 +1,26 @@
+import { useEffect } from 'react'
 import './App.css'
 import Header from './components/Header'
 import Notes from './components/Notes'
-import { Provider } from 'react-redux'
-import { configureStore } from '@reduxjs/toolkit'
-import { useReducer } from './reducers/useReducer'
+import { useDispatch } from 'react-redux'
+import { getNotes } from './services/notesService'
 
 function App () {
-  const store = configureStore({ reducer: useReducer })
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch({ type: '@token/getToken' })
+    getNotes()
+      .then(notes => {
+        dispatch({ type: '@notes/getNotes', payload: notes })
+      })
+      .catch(error => console.log(error))
+  }, [])
 
   return (
     <div className='container'>
-      <Provider store={store}>
-        <Header />
-        <Notes />
-      </Provider>
+      <Header />
+      <Notes />
     </div>
   )
 }

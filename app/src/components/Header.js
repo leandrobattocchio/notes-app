@@ -6,15 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 const Header = () => {
   const dispatch = useDispatch()
   const [login, setLogin] = useState(false)
-  const state = useSelector(state => state)
-  const { token } = state
+  const token = useSelector(state => state.token)
 
   useEffect(() => {
-    if (!token) {
-      dispatch({ type: 'getToken' })
-    } else {
-      setLogin(true)
-    }
+    if (token) setLogin(true)
   }, [token])
 
   function handleSetLogin () {

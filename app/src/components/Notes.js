@@ -1,33 +1,20 @@
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import Note from './Note'
-import axios from 'axios'
 import Togglable from './Togglable'
-import { useSelector, useDispatch } from 'react-redux'
 import NoteForm from './NoteForm'
+import { useSelector } from 'react-redux'
 
 function Notes () {
-  const state = useSelector(state => state)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    axios.get('/api/notes/')
-      .then((response) => {
-        const { data } = response
-        dispatch({ type: 'getNotes', payload: data })
-      })
-      .catch(error => console.log(error))
-  }, [])
-
-  console.log(state)
+  const notes = useSelector(state => state.notes)
 
   return (
     <div className='container'>
       <h1 style={{ textAlign: 'center' }}>APLICACION DE NOTAS</h1>
-      {state.notes !== []
+      {notes
         ? (
           <Togglable buttonLabel='notes' style='row row-example'>
-            {state.notes.map((nota) => <Note key={nota.id} nota={nota} token={state.token} />)}
+            {notes.map((nota) => <Note key={nota.id} nota={nota} />)}
           </Togglable>
           )
         : ('Cargando...')}

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 
-function Note ({ nota, token }) {
+function Note ({ nota }) {
   const [important, setImportant] = useState(nota.important)
   const [disabled, setDisabled] = useState(false)
+  const token = useSelector(state => state.token)
 
   const handleChangeImportant = async () => {
     setDisabled(true)
