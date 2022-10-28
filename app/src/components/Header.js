@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import Login from './Login'
-import Register from './Register'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { Link } from 'react-router-dom'
 const Header = () => {
-  const dispatch = useDispatch()
-  const [login, setLogin] = useState(false)
   const token = useSelector(state => state.token)
+  const dispatch = useDispatch()
 
-  useEffect(() => {
-    if (token) setLogin(true)
-  }, [token])
-
-  function handleSetLogin () {
-    setLogin(prevState => !prevState)
+  function handleLogout () {
+    dispatch({ type: '@token/logout' })
   }
 
   return (
     <div className='container-fluid'>
+      <Link to='/'>Home</Link>
       {token
-        ? ''
-        : <button onClick={handleSetLogin}>{login ? 'Registrarse' : 'Loguearse'}</button>}
+        ? <a style={{ float: 'right' }} onClick={handleLogout}> Desloguearse</a>
+        : [
+          <Link style={{ float: 'right', marginLeft: '25px' }} key='login' to='/login'>Login</Link>,
+          <Link style={{ float: 'right' }} key='register' to='/register'>Register</Link>
+          ]}
 
-      {login
-        ? <Login dispatch={dispatch} />
-        : <Register />}
     </div>
   )
 }
