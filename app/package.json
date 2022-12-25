@@ -44,5 +44,5 @@
     "@testing-library/react": "13.4.0",
     "cypress": "10.9.0"
   },
-  "proxy": "http://localhost:3000/"
+  "proxy": "https://notes-app-gamma-two.vercel.app/"
 }
