@@ -21,7 +21,7 @@
     "web-vitals": "2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=4000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "cypress:open": "cypress open",
@@ -44,5 +44,5 @@
     "@testing-library/react": "13.4.0",
     "cypress": "10.9.0"
   },
-  "proxy": "https://notes-app-gamma-two.vercel.app/"
+  "proxy": "http://localhost:3000/"
 }

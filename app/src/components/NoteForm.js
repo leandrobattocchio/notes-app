@@ -53,7 +53,7 @@ function NoteForm () {
                 value={noteContent}
                 onChange={({ target }) => setNoteContent(target.value)}
               />
-              <button aria-busy={disabled}>Enviar nota</button>
+              <button disabled={disabled}>Enviar nota</button>
             </div>
           </form>)
         : <h2>Para enviar notas debe loguearse...</h2>}
