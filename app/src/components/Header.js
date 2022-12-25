@@ -1,6 +1,11 @@
+import { AppBar, Button } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
+
 const Header = () => {
   const token = useSelector(state => state.token)
   const dispatch = useDispatch()
@@ -8,18 +13,29 @@ const Header = () => {
   function handleLogout () {
     dispatch({ type: '@token/logout' })
   }
-
   return (
-    <div className='container-fluid'>
-      <Link to='/'>Home</Link>
-      {token
-        ? <a style={{ float: 'right' }} onClick={handleLogout}> Desloguearse</a>
-        : [
-          <Link style={{ float: 'right', marginLeft: '25px' }} key='login' to='/login'>Login</Link>,
-          <Link style={{ float: 'right' }} key='register' to='/register'>Register</Link>
-          ]}
-
-    </div>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position='fixed' color='default'>
+        <Toolbar>
+          <IconButton edge='start' color='inherit' aria-label='menu' />
+          <Button color='inherit' component={Link} to='/'>
+            Home
+          </Button>
+          {token
+            ? <Button sx={{ marginLeft: 'auto' }} color='error' variant='outlined' onClick={handleLogout}>Desloguearse</Button>
+            : (
+              <Box sx={{ marginLeft: 'auto' }}>
+                <Button key='login' color='inherit' component={Link} to='/login'>
+                  Login
+                </Button>
+                <Button key='register' color='inherit' component={Link} to='/register'>
+                  Register
+                </Button>
+              </Box>
+              )}
+        </Toolbar>
+      </AppBar>
+    </Box>
   )
 }
 

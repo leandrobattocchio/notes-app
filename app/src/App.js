@@ -7,6 +7,7 @@ import { getNotes } from './services/notesService'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import Login from './components/Login'
 import Register from './components/Register'
+import Container from '@mui/material/Container'
 
 function App () {
   const dispatch = useDispatch()
@@ -21,28 +22,29 @@ function App () {
   }, [])
 
   return (
-    <div className='container'>
+    <div className='fondo'>
       <BrowserRouter>
         <Header />
-        <Routes>
-          <Route path='/' element={<Notes />} />
-          <Route
-            path='/login' element={
+        <Container maxWidth='lg'>
+          <Routes>
+            <Route path='/' element={<Notes />} />
+            <Route
+              path='/login' element={
              token
                ? <Navigate to='/' replace />
                : <Login />
             }
-          />
-          <Route
-            path='/register' element={
+            />
+            <Route
+              path='/register' element={
               token
                 ? <Navigate to='/' replace />
                 : <Register />
             }
-          />
-        </Routes>
+            />
+          </Routes>
+        </Container>
       </BrowserRouter>
-
     </div>
   )
 }

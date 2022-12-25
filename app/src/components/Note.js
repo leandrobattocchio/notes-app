@@ -1,5 +1,8 @@
 import React from 'react'
 import { useNote } from '../hooks/useNote'
+import TableCell from '@mui/material/TableCell'
+import { Button } from '@mui/material'
+import Typography from '@mui/material/Typography'
 
 function Note ({ nota }) {
   const { handleChangeImportant, important, disabled } = useNote(nota)
@@ -7,22 +10,16 @@ function Note ({ nota }) {
   return (
     nota.user
       ? (
-        <div>
-          <b>A͟u͟t͟o͟r: </b> <strong>{nota.user.username}</strong>
-          <br />
-          <b>I͟m͟p͟o͟r͟t͟a͟n͟t͟e: {important ? 'Si' : 'No'}</b>
-          <div className='grid'>
-            <b>C͟o͟n͟t͟e͟n͟i͟d͟o: {nota.content}</b>
-
-            {important
-              ? <button className='secondary' disabled={disabled} onClick={handleChangeImportant}>Importante</button>
-              : <button className='secondary' disabled={disabled} onClick={handleChangeImportant}>No importante</button>}
-          </div>
-
-        </div>
+        <>
+          <TableCell>
+            <Typography mt={2} variant='h6'>{nota.content}</Typography>
+          </TableCell>
+          {important
+            ? <TableCell align='right'><Button color='inherit' variant='contained' disabled={disabled} onClick={handleChangeImportant}>Importante</Button></TableCell>
+            : <TableCell align='right'><Button color='inherit' variant='contained' disabled={disabled} onClick={handleChangeImportant}>No importante</Button></TableCell>}
+        </>
         )
       : 'Cargando...'
-
   )
 }
 

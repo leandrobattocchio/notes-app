@@ -114,7 +114,7 @@ notesRouter.put('/:id', (request, response, next) => {
 
       Note.findByIdAndUpdate(id, newNoteInfo, { new: true })
         .then(result => {
-          response.status(200).json(result)
+          response.status(200).json(result).end()
           DB_DISCONNECT()
         })
         .catch(next)
