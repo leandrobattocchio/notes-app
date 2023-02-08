@@ -1,0 +1,10 @@
+.togglable-notes{
+    margin: 55px 0;
+}
+
+.togglable-notes-button{
+    background-color: rgb(232, 205, 205);
+    border-radius: 5px;
+    border-color: rgb(237, 215, 241);
+    color: rgb(250, 243, 243);
+}

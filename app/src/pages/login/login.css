@@ -1,0 +1,26 @@
+.login-container{
+    background-color: rgb(236, 225, 201);
+    height: 36vh;
+    width: 25vw;
+    margin: 255px auto;
+    border-radius: 5px;
+}
+
+.login-container form{
+    text-align: center;
+    padding: 110px 0;
+}
+
+.login-container form input{
+   margin: 6px 0;
+   border-radius: 3px;
+   border-color: rgb(241, 220, 191);
+}
+
+.login-container form button{
+   margin: 3px;
+   padding: 0 77px;
+   background-color: rgb(250, 208, 166);
+   border-color: rgb(200, 200, 200);
+   color: rgb(255, 255, 255);
+}

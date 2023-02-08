@@ -1,0 +1,33 @@
+.login-panel a{
+   margin: 0 5px;
+}
+
+.header-note-app{
+    background-color: rgb(246, 201, 201) !important;
+}
+
+.header-note-app a{
+    background-color: rgb(249, 152, 152);
+}
+
+.login-logout-buttons a{
+    border-color: rgb(230, 169, 137);
+}
+
+.login-logout-buttons a:hover{
+    background-color: rgb(250, 172, 133) !important;
+}
+
+#home{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    background-color: rgb(246, 201, 201);
+}
+
+#login:hover{
+    background-color: rgb(110, 106, 106);
+}
+
+#register:hover{
+    background-color: rgb(110, 106, 106);
+}

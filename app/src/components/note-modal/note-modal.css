@@ -1,0 +1,79 @@
+.conteiner-note-modal{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.note-modal-text{
+    position: absolute;
+    top: 150px;
+    left: 11px;
+    min-width: 474px;
+    max-width: 480px;
+    height: 300px;
+   
+    background-color: antiquewhite;
+}
+
+.note-modal-title{
+  position: absolute;
+  top: 7vh;
+  left: 11px;
+  width: 80%;
+}
+
+
+.note-modal-text p{
+  margin: 5px 5px;
+}
+
+.button-close-modal-note{
+  position: absolute;
+  top: 10px;
+  right: 11px;
+}
+
+.button-close-modal-note button{
+  background-color: rgb(249, 243, 238);
+  color: rgb(232, 197, 197);
+  border-radius: 5px;
+  border-color: rgb(236, 199, 158);
+  width: 40px;
+}
+
+
+.note-modal-text p{
+  height: 300px;
+  text-overflow:  ellipsis;
+}
+
+.modal-container{
+  background-color: rgb(57, 56, 56, 0.6) !important;
+  height: 100vh;
+  width: 100vw;
+  transition: all .5s;
+  z-index: 1;
+  padding: 5% 0 !important;
+}
+
+.conteiner-note-modal img{
+  width: 270px;
+  height: 250px;
+}
+
+
+.note-modal-important{
+  position: absolute;
+  bottom: -20px;
+  left:41%;
+}
+
+#send-note-button{
+  background-color: rgb(246, 232, 232);
+}
+
+#send-note-button:hover{
+  background-color: rgb(247, 210, 210);
+}

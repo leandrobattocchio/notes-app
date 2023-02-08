@@ -1,0 +1,29 @@
+.post-note textarea{
+    height: 220px;
+    width: 400px;
+    color: rgb(60, 59, 59);
+    font-size: 18px;
+    background-color: rgb(250, 214, 214);
+    border-radius:5px;
+}
+
+.post-note textarea:focus{
+    background-color: rgb(233, 202, 202);
+    border-radius:5px;
+}
+
+.post-note button{
+    display: block;
+    margin: 0 auto;
+    width: 400px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgb(232, 205, 205);
+    border-color: rgb(241, 219, 243);
+    color: rgb(255, 255, 255);
+}
+
+.post-note button:disabled{
+    background-color: rgb(216, 187, 172);
+    color: rgb(217, 213, 213);
+}
