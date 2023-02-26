@@ -22,7 +22,6 @@ notesRouter.get('/', (request, response, next) => {
 
 notesRouter.get('/:id', (request, response, next) => {
   const { id } = request.params
-
   DB_CONNECT()
     .then(() => {
       Note.findById(id).then(note => {
@@ -95,6 +94,7 @@ notesRouter.post('/', userExtractor, async (request, response, next) => {
 notesRouter.put('/:id', async (request, response, next) => {
   const note = request.body
   const { id } = request.params
+  console.log(id)
 
   if (!note.content) {
     return response
